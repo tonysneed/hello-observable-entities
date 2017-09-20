@@ -40,7 +40,9 @@ key: productName origValue: Chai currentValue: Chang
 
 ## Debug the app
 
-Set breakpoints on lines 18 and 26 in app.ts. Then press **F5** to start debugging. First you'll hit the breakpoint line 26, which sets the `productName` property.  This will notify `modifyListener` that the change has taken place, sending the name of the property that was updated, as well as the original and current values. 
+Set breakpoints on lines 18 and 26 in app.ts. Then press **F5** to start debugging. First you'll hit the breakpoint line 26, which sets the `productName` property.  This will notify `modifyListener` that the change has taken place, sending the name of the property that was updated, as well as the original and current values.
+
+![obs-entities-debug](https://user-images.githubusercontent.com/2836367/30654763-835112de-9df4-11e7-8d40-6416a7f95dd6.gif)
 
 ## Inspect the code in app.ts
 
