@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "observable-entities": "^1.0.0-beta.1"
+  },
+  "devDependencies": {
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
   }
 }

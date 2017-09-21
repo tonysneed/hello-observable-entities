@@ -44,7 +44,9 @@ Set breakpoints on lines 18 and 26 in app.ts. Then press **F5** to start debuggi
 
 ![obs-entities-debug](https://user-images.githubusercontent.com/2836367/30654763-835112de-9df4-11e7-8d40-6416a7f95dd6.gif)
 
-## Inspect the code in app.ts
+> Note: You will need to build the app prior to running or debugging it.
+
+## ObservableEntity
 
 ### Define a class that extends ObservableEntity
 
@@ -63,7 +65,7 @@ class Product extends ObservableEntity {
 }
 ```
 
-### Create listener
+### Create a listener
 
 We then define a listener of type `Subject<INotifyInfo>` that logs information about the property update.
 
@@ -83,7 +85,7 @@ const product = new Product('Chai');
 product.modifyListeners.push(modifyListener);
 ```
 
-### Update property to see the listener get notified
+### Update a property to see the listener get notified
 
 ```js
 // Set productName property
@@ -93,4 +95,106 @@ product.productName = 'Chang';
 // key: productName origValue: Chai currentValue: Chang
 ```
 
+## ObservableSet
 
+### Create an ObservableSet
+
+Create an `ObservableSet` and add entities to it.
+
+```js
+// Observe collection adds and deletes
+const productSet = new ObservableSet(product);
+```
+
+### Create listeners
+
+Add listeners to receive notifications when entities are added or removed from the set.
+
+```js
+// Create listener that writes to console when entities are added
+const addListenerSet = new Subject<INotifyInfo>();
+addListenerSet.subscribe(info => {
+  console.log(`Set Add - ${(info.currentValue as Product).productName}`)
+});
+productSet.addListeners.push(addListenerSet);
+
+// Create listener that writes to console when entities are removed
+const removeListenerSet = new Subject<INotifyInfo>();
+removeListenerSet.subscribe(info => {
+  console.log(`Set Remove - ${(info.currentValue as Product).productName}`)
+});
+productSet.removeListeners.push(removeListenerSet);
+```
+
+### Add an entity to see the listener get notified
+
+```js
+// Add entity
+const newProduct = new Product('Aniseed Syrup');
+productSet.add(newProduct);
+
+// Expected output:
+// Set Add - Aniseed Syrup
+```
+
+### Remove an entity to see the listener get notified
+
+```js
+// Remove entity
+productSet.delete(newProduct);
+
+// Expected output:
+// Set Remove - Aniseed Syrup
+```
+
+## ObservableMap
+
+### Create an ObservableMap
+
+Create an `ObservableMap` and add entries to it.
+
+```js
+// Observe collection adds and deletes
+const productSet = new ObservableSet(product);
+```
+
+### Create listeners
+
+Add listeners to receive notifications when entities are added or removed from the set.
+
+```js
+// Create listener that writes to console when entities are added
+const addListenerSet = new Subject<INotifyInfo>();
+addListenerSet.subscribe(info => {
+  console.log(`Set Add - ${(info.currentValue as Product).productName}`)
+});
+productSet.addListeners.push(addListenerSet);
+
+// Create listener that writes to console when entities are removed
+const removeListenerSet = new Subject<INotifyInfo>();
+removeListenerSet.subscribe(info => {
+  console.log(`Set Remove - ${(info.currentValue as Product).productName}`)
+});
+productSet.removeListeners.push(removeListenerSet);
+```
+
+### Add an entity to see the listener get notified
+
+```js
+// Add entity
+const newProduct = new Product('Aniseed Syrup');
+productSet.add(newProduct);
+
+// Expected output:
+// Set Add - Aniseed Syrup
+```
+
+### Remove an entity to see the listener get notified
+
+```js
+// Remove entity
+productSet.delete(newProduct);
+
+// Expected output:
+// Set Remove - Aniseed Syrup
+```
